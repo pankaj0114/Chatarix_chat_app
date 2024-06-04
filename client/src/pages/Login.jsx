@@ -2,8 +2,10 @@
 import React ,{useState, Component} from 'react';
 
 
-import {Button, Container, Paper, TextField, Typography} from "@mui/material";
-
+import {Button, Container, Paper, TextField, Typography, Avatar, IconButton, Stack} from "@mui/material";
+import {AddAPhoto} from '@mui/icons-material';
+import { VisuallyHiddenInput } from '../components/styles/StyledComponents';
+import {useInputValidation} from '6pp';
 
 
 const Login = () => {
@@ -12,7 +14,14 @@ const Login = () => {
 
     const[isLogin , setIsLogin] = useState(true);
 
-    const toggleLogin = () => setIsLogin(false);
+
+    const toggleLogin = () => setIsLogin((prev) => !prev);
+
+    const name = useInputValidation("");
+    const bio = useInputValidation("");
+    const username = useInputValidation("");
+    const password = useInputValidation("");
+
   return( 
         
     <div
@@ -22,7 +31,9 @@ const Login = () => {
     >
 
     
-  <Container component={"main"} maxWidth="xs"
+  <Container 
+  component={"main"} 
+  maxWidth="xs"
   
   sx={{
     height: "100vh",
@@ -36,7 +47,7 @@ const Login = () => {
         elevation={3}
         sx={{
                 padding: 4,
-                display: "Flex",
+                display: "flex",
                 flexDirection:"column",
                 alignitems:"center",
 
@@ -45,7 +56,7 @@ const Login = () => {
         >
             { isLogin ? (<>
 
-        <Typography variant="h5"> Login </Typography>
+        <Typography variant="h5"textAlign={"center"} > Login </Typography>
 
             <form style={{
                 width:"100%",
@@ -56,14 +67,18 @@ const Login = () => {
                 fullWidth 
                 label="Username" 
                 margin="normal"  
-                variant="outlined" />
+                variant="outlined"
+                value={username.value}
+                onChange={username.changeHandler} />
 
    <TextField 
                 required 
                 fullWidth 
                 label="Password" 
                 margin="normal"  
-                variant="outlined" />
+                variant="outlined"
+                value={password.value} 
+                onChange={password.changeHandler}/>
 
            <Button
               sx={
@@ -92,7 +107,126 @@ const Login = () => {
             
             </>
             
-             ) : (<span>register</span>)}
+             ) : (<>
+
+              <Typography variant="h5" textAlign={"center"}> Sign Up </Typography>
+      
+                  <form style={{
+                      width:"100%",
+                      marginTop:"1rem",
+                  }}>
+
+                   <Stack
+                    position={"relative"}
+                    width={"10rem"}
+                   margin={"auto"}
+                   
+                    
+                    >
+                       <Avatar
+                    sx={{
+                      width:"10rem",
+                      height: "10rem",
+                      objectFit:"contain",
+                     
+                     
+                    }}
+                    />
+
+                    <IconButton
+                     sx={
+                      {
+                        position:"absolute",
+                        bottom:"0",
+                        right:"0",
+                        color:"white",
+                        bgcolor: "rgba(0,0,0,0.5)",
+                        ":hover":{
+                          bgcolor:"rgba(0,0,0,0.7)",
+                        },
+                      }
+                     }
+                    
+                    component="label"
+                    
+                    >
+                      <>
+                      <AddAPhoto />
+                      < VisuallyHiddenInput type="file" />
+
+
+                      </>
+
+
+                    </IconButton>
+
+                    </Stack>
+
+                  
+                    <TextField 
+                      required 
+                      fullWidth 
+                      label="Name" 
+                      margin="normal"  
+                      variant="outlined" 
+                      value={name.value}
+                      onChange={name.changeHandler}
+                      />
+
+                    <TextField 
+                      required 
+                      fullWidth 
+                      label="Bio" 
+                      margin="normal"  
+                      variant="outlined" 
+                      value={bio.value}
+                      onChange={bio.changeHandler}/>
+
+                      <TextField 
+                      required 
+                      fullWidth 
+                      label="Username" 
+                      margin="normal"  
+                      variant="outlined"
+                      value={username.value}
+                      onChange={username.changeHandler} />
+      
+         <TextField 
+                      required 
+                      fullWidth 
+                      label="Password" 
+                      margin="normal"  
+                      variant="outlined"
+                      value={password.value}
+                      onChange={password.changeHandler} />
+      
+                 <Button
+                    sx={
+                      {
+                          marginTop:"1rem",
+                      }
+                    } variant="contained" 
+                          color="primary" 
+                          type="submit"
+                          fullWidth
+                          >
+                              Sign Up
+                  </Button> 
+      
+                  <Typography textAlign={"center"} m={"1rem"}>
+                      OR</Typography>  
+      
+                      <Button
+                      sx={{
+                         
+                      }}
+                      fullWidth
+                      variant="text"
+                      onClick={toggleLogin} > Login Instead </Button>
+                  </form>
+                  
+                  </>
+                  )}
     </Paper>
   </Container>
   </div>
