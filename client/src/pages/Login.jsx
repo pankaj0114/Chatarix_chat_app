@@ -5,7 +5,9 @@ import React ,{useState, Component} from 'react';
 import {Button, Container, Paper, TextField, Typography, Avatar, IconButton, Stack} from "@mui/material";
 import {AddAPhoto} from '@mui/icons-material';
 import { VisuallyHiddenInput } from '../components/styles/StyledComponents';
-import {useInputValidation} from '6pp';
+import {useFileHandler, useInputValidation, useStrongPassword} from '6pp';
+import { usernameValidator } from '../utils/validators';
+
 
 
 const Login = () => {
@@ -19,8 +21,18 @@ const Login = () => {
 
     const name = useInputValidation("");
     const bio = useInputValidation("");
-    const username = useInputValidation("");
-    const password = useInputValidation("");
+    const username = useInputValidation("", usernameValidator);
+    const password = useStrongPassword();
+
+    const avatar = useFileHandler("single");
+
+    const handleLogin = (e)=>{
+      e.preventDefault();
+    };
+
+    const handleSignUp = (e)=>{
+      e.preventDefault();
+    };
 
   return( 
         
@@ -61,7 +73,9 @@ const Login = () => {
             <form style={{
                 width:"100%",
                 marginTop:"1rem",
-            }}>
+            }}
+            onSubmit={handleLogin}
+            >
                 <TextField 
                 required 
                 fullWidth 
@@ -71,10 +85,13 @@ const Login = () => {
                 value={username.value}
                 onChange={username.changeHandler} />
 
+
+             
    <TextField 
                 required 
                 fullWidth 
                 label="Password" 
+                type="password"
                 margin="normal"  
                 variant="outlined"
                 value={password.value} 
@@ -129,9 +146,14 @@ const Login = () => {
                       height: "10rem",
                       objectFit:"contain",
                      
-                     
-                    }}
+                 }}
+
+                
+
+                 src={avatar.preview}
                     />
+
+
 
                     <IconButton
                      sx={
@@ -152,7 +174,7 @@ const Login = () => {
                     >
                       <>
                       <AddAPhoto />
-                      < VisuallyHiddenInput type="file" />
+                      < VisuallyHiddenInput type="file" onChange={avatar.changeHandler}/>
 
 
                       </>
@@ -161,6 +183,14 @@ const Login = () => {
                     </IconButton>
 
                     </Stack>
+                    {
+                  avatar.error && (
+                    <Typography m={"1rem auto"} width={"fit-content"} display ={"block"}color="error" variant="caption">
+                          {avatar.error}
+                    </Typography>
+                  )
+
+              }
 
                   
                     <TextField 
@@ -190,16 +220,34 @@ const Login = () => {
                       variant="outlined"
                       value={username.value}
                       onChange={username.changeHandler} />
+
+{
+                  username.error && (
+                    <Typography color="error" variant="caption">
+                          {username.error}
+                    </Typography>
+                  )
+
+              }
       
          <TextField 
                       required 
                       fullWidth 
                       label="Password" 
+                      type="password"
                       margin="normal"  
                       variant="outlined"
                       value={password.value}
                       onChange={password.changeHandler} />
       
+    {  
+      password.error && (
+                    <Typography color="error" variant="caption">
+                          {password.error}
+                    </Typography>
+                  )
+
+              }
                  <Button
                     sx={
                       {
