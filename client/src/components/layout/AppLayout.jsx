@@ -35,7 +35,7 @@ const AppLayout = () => WrappedComponent=>{
       {
         display : {xs: "none", md:"block"},
         padding: "2rem",
-        bgcolor:"#039be5"
+        bgcolor:"#ffffc9",
       }
     } 
     >
