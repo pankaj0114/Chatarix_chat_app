@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import React, { Suspense } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { blue } from '../../constants/color';
 import {
   Add as AddIcon,
@@ -19,7 +19,10 @@ import {
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-import SearchDialog from '../specific/Search';
+
+const SearchDialog = lazy(() => import('../specific/Search'));
+const NotificationDialog = lazy(() => import('../specific/Notifications'));
+const NewGroupDialog = lazy(() => import('../specific/NewGroup'));
 
 const Header = () => {
   const navigate = useNavigate();
@@ -119,6 +122,18 @@ const Header = () => {
       {isSearch && (
         <Suspense fallback={<div>Loading...</div>}>
           <SearchDialog />
+        </Suspense>
+      )}
+
+      {isNotification && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <NotificationDialog />
+        </Suspense>
+      )}
+
+      {isNewGroup && (
+        <Suspense fallback={<div>Loading...</div>}>
+          <NewGroupDialog />
         </Suspense>
       )}
     </>
