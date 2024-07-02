@@ -5,6 +5,7 @@ import { Grid } from '@mui/material';
 import ChatList from '../specific/ChatList';
 import { sampleChats } from '../../constants/sampleData';
 import { useParams } from 'react-router-dom';
+import Profile from '../specific/Profile';
 
 const AppLayout = () => (WrappedComponent) => {
   return (props) => {
@@ -33,11 +34,10 @@ const AppLayout = () => (WrappedComponent) => {
           >
             <ChatList
               chats={sampleChats}
-              chatId={'1'}
+              chatId={chatId}
               newmessagesAlert={[
                 {
-                  chatId: '1',
-                  count: 4,
+                  chatId: 'chatId',
                 },
               ]}
             />
@@ -57,7 +57,7 @@ const AppLayout = () => (WrappedComponent) => {
               bgcolor: '#ffffc9',
             }}
           >
-            Thrid
+            <Profile />
           </Grid>
         </Grid>
       </>
