@@ -3,7 +3,6 @@ import { Link } from '../styles/StyledComponents';
 import { Stack, Typography } from '@mui/material';
 import { Box } from '@mui/material';
 import AvatarCard from './AvatarCard';
-
 const ChatItem = ({
   avatar = [],
   name,
@@ -35,10 +34,8 @@ const ChatItem = ({
         }}
       >
         <AvatarCard avatar={avatar} />
-
         <Stack>
           <Typography>{name}</Typography>
-
           {newMessageAlert && (
             <Typography>
               {newMessageAlert.count}
@@ -64,5 +61,4 @@ const ChatItem = ({
     </Link>
   );
 };
-
 export default memo(ChatItem);

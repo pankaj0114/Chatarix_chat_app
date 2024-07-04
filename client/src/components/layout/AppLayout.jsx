@@ -6,22 +6,18 @@ import ChatList from '../specific/ChatList';
 import { sampleChats } from '../../constants/sampleData';
 import { useParams } from 'react-router-dom';
 import Profile from '../specific/Profile';
-
 const AppLayout = () => (WrappedComponent) => {
   return (props) => {
     const params = useParams();
     const chatId = params.chatId;
-
     const handleDeleteChat = (e, _id, groupChat) => {
       e.preventDefault();
       console.log('Delete Chat', _id, groupChat);
     };
-
     return (
       <>
         <Title />
         <Header />
-
         <Grid container height={'calc(100vh - 4rem)'}>
           <Grid
             item
@@ -42,7 +38,6 @@ const AppLayout = () => (WrappedComponent) => {
               ]}
             />
           </Grid>
-
           <Grid item xs={12} sm={8} md={5} lg={6} height={'100%'}>
             <WrappedComponent {...props} />
           </Grid>
@@ -64,5 +59,4 @@ const AppLayout = () => (WrappedComponent) => {
     );
   };
 };
-
 export default AppLayout;

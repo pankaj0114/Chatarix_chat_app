@@ -1,7 +1,6 @@
 import React from 'react';
 import { Stack } from '@mui/material';
 import ChatItem from '../shared/ChatItem';
-
 const ChatList = ({
   w = '100%',
   chats = [],
@@ -19,13 +18,10 @@ const ChatList = ({
     <Stack width={w} direction={'column'}>
       {chats?.map((data, index) => {
         const { avatar, _id, name, groupChat, members } = data;
-
         const newMessageAlert = newmessagesAlert.find(
           (alert) => alert.chatId === _id
         );
-
         const isOnline = members?.some((member) => onlineUsers.includes(_id));
-
         return (
           <ChatItem
             index={index}
@@ -44,5 +40,4 @@ const ChatList = ({
     </Stack>
   );
 };
-
 export default ChatList;

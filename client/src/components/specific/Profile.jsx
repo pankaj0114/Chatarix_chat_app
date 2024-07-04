@@ -5,7 +5,7 @@ import {
   AlternateEmailTwoTone as UserNameIcon,
   CalendarMonth as CalendarICon,
 } from '@mui/icons-material';
-
+import moment from 'moment';
 const Profile = () => {
   return (
     <Stack spacing={'2rem'} direction={'column'} alignItems={'center'}>
@@ -18,7 +18,6 @@ const Profile = () => {
           border: '5px solid white',
         }}
       />
-
       <ProfileCard heading={'Bio'} text={'gdfftftdfwgdvg hehgfyefyg'} />
       <ProfileCard
         heading={'Username'}
@@ -30,11 +29,14 @@ const Profile = () => {
         text={'Pankaj Kashyap'}
         Icon={<FaceIcon />}
       />
-      <ProfileCard heading={'Joined'} text={''} Icon={<CalendarICon />} />
+      <ProfileCard
+        heading={'Joined'}
+        text={moment('2024-07-02T00:00:00.000Z').fromNow()}
+        Icon={<CalendarICon />}
+      />
     </Stack>
   );
 };
-
 const ProfileCard = ({ text, Icon, heading }) => (
   <Stack
     direction={'row'}
@@ -44,7 +46,6 @@ const ProfileCard = ({ text, Icon, heading }) => (
     textAlign={'center'}
   >
     {Icon && Icon}
-
     <Stack>
       <Typography variant="body1">{text} </Typography>
       <Typography color={'grey'} variant="caption">
@@ -53,5 +54,4 @@ const ProfileCard = ({ text, Icon, heading }) => (
     </Stack>
   </Stack>
 );
-
 export default Profile;
