@@ -1,34 +1,63 @@
-import React from 'react';
+import { useInputValidation } from '6pp';
 import {
-  Avatar,
   Button,
   Dialog,
   DialogTitle,
-  ListItem,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
+import React, { useState } from 'react';
 import { sampleUsers } from '../../constants/sampleData';
+import UserItem from '../shared/UserItem';
 
 const NewGroup = () => {
-  const selectMemberHandler = () => {};
-  return (
-    <Dialog open>
-      <Stack p={{ xs: '1rem', sm: '2rem' }} maxWidth={'25rem'}>
-        <DialogTitle>New Group</DialogTitle>
+  const groupName = useInputValidation('');
 
-        <TextField />
-        <Typography></Typography>
+  const [members, setMembers] = useState(sampleUsers);
+  const [selectedMembers, setSelectedMembers] = useState([]);
+
+  const selectMemberHandler = (id) => {
+    setSelectedMembers((prev) =>
+      prev.includes(id)
+        ? prev.filter((currElement) => currElement !== id)
+        : [...prev, id]
+    );
+  };
+
+  const submitHandler = () => {};
+  const closehandler = () => {};
+  return (
+    <Dialog open onClose={closehandler}>
+      <Stack p={{ xs: '1rem', sm: '3rem' }} maxWidth={'30rem'} spacing={'2rem'}>
+        <DialogTitle textAlign={'center'} variant="h4">
+          New Group
+        </DialogTitle>
+
+        <TextField
+          label="Group Name"
+          value={groupName.value}
+          onChange={groupName.changeHandler}
+        />
+        <Typography variant="body1">Members</Typography>
         <Stack>
-          {users.map((i) => (
+          {members.map((i) => (
             <UserItem
               user={i}
               key={i._id}
               handler={selectMemberHandler}
-              handlerIsLoading={isLoadingSendFriendRequest}
+              isAdded={selectedMembers.includes(i._id)}
             />
           ))}
+        </Stack>
+
+        <Stack direction={'row'} justifyContent={'space-evenly'}>
+          <Button variant="text" color="error" size="large">
+            Cancel
+          </Button>
+          <Button variant="contained" size="large" onClick={submitHandler}>
+            Create
+          </Button>
         </Stack>
       </Stack>
     </Dialog>
