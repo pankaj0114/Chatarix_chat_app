@@ -9,11 +9,15 @@ import {
 import { InputBox } from '../components/styles/StyledComponents';
 import { blue } from '@mui/material/colors';
 import FileMenu from '../components/dialogs/FileMenu';
+import { sampleMessage } from '../constants/sampleData';
+import MessageComponent from '../components/shared/MessageComponent';
 
+const user = {
+  _id: 'dgchgcgccd',
+  name: 'Rohan Singh',
+};
 const Chat = () => {
   const containerRef = useRef(null);
-
-  const fileMenuRef = useRef(null);
 
   return (
     <Fragment>
@@ -29,7 +33,9 @@ const Chat = () => {
           overflowY: 'auto',
         }}
       >
-        {/* Messages Render*/}
+        {sampleMessage.map((i) => (
+          <MessageComponent key={i._id} message={i} user={user} />
+        ))}
       </Stack>
 
       <form
@@ -50,7 +56,6 @@ const Chat = () => {
               left: '1.5rem',
               rotate: '30deg',
             }}
-            ref={fileMenuRef}
           >
             <AttachFileIcon />
           </IconButton>
@@ -70,7 +75,7 @@ const Chat = () => {
         </Stack>
       </form>
 
-      <FileMenu anchorE1={fileMenuRef.current} />
+      <FileMenu />
     </Fragment>
   );
 };
