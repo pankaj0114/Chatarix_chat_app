@@ -40,7 +40,7 @@ const NotificationItem = memo(({ sender, _id, handler }) => {
       <Stack
         direction={'row'}
         alignItems={'center'}
-        spacing={'1 rem'}
+        spacing={'1rem'}
         width={'100%'}
       >
         <Avatar />
